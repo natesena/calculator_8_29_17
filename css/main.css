@@ -1,6 +1,12 @@
-.digit{
+.digit, .operator{
     height: 50px;
-    width: 50px;
+    width: 31%;
+}
+.digit{
+    background-color: #8C8CFE;
+}
+.operator{
+    background-color: #0ffff0;
 }
 #calculator{
     width: 500px;

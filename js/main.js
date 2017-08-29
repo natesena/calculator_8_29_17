@@ -6,3 +6,9 @@ digits.forEach(function(btn){
         readout.innerText += this.innerText;
     })
 })
+operators.forEach(function(btn){
+    btn.addEventListener('click', function(){
+        readout.innerText += this.innerText;
+    })
+})
+
