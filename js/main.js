@@ -9,6 +9,7 @@ var evalArray = [];
 equalsBtn.addEventListener('click', function(){
     console.log(evalArray);
     readout.innerHTML = solve();
+    evalArray.push(readout.innerHTML);
 })
 
 clearBtn.addEventListener('click', function(){
