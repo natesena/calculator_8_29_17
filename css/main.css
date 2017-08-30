@@ -1,11 +1,11 @@
-.digit, .operator{
+.digit, .operator, #clear, #equals{
     height: 50px;
     width: 31%;
 }
 .digit{
     background-color: #8C8CFE;
 }
-.operator{
+.operator, #equals, #clear{
     background-color: #0ffff0;
 }
 #calculator{

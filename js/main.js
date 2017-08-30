@@ -2,13 +2,17 @@ var readout = document.querySelector('#readout');
 var digits = document.querySelectorAll('.digit');
 var operators = document.querySelectorAll('.operator');
 var equalsBtn = document.querySelector('#equals');
+var clearBtn = document.querySelector('#clear');
 
 var evalArray = [];
 
 equalsBtn.addEventListener('click', function(){
-    //readout.innerText = eval(readout.innerText);
-    //make this work with evaluate
     console.log(evalArray);
+    readout.innerHTML = solve();
+})
+
+clearBtn.addEventListener('click', function(){
+    clear();
 })
 
 function isSame(btn){
@@ -84,18 +88,63 @@ operators.forEach(function(btn){
 
 
 
-function evaluate(operation, num1, num2){
+function clear(){
+    readout.innerHTML ='';
+    for(var i = 0; i < evalArray.length; i++){
+        evalArray.push();
+    }
+    console.log(evalArray);
+}
+
+function evaluate(num1, operation, num2){
+    console.log('evaluating '+num1+ ' ' + operation + ' ' + num2);
+    if(!!evalArray[0]){//if array is not empty
+        var index1 = evalArray.shift();
+        console.log('-- evaluate next operator index1: '+ index1+ ' --');
+        var index2 = evalArray.shift();
+        console.log('-- evaluate next number index2: '+ index2+ ' --');
+        return evaluate(simpleEvaluate(num1, operation, num2), index1, index2);
+    }
+    else{
+        console.log('evaluate evalArray empty, answer coming');
+        return simpleEvaluate(num1, operation, num2);
+    }
+  
+}
+function simpleEvaluate(num1, operation, num2){
+    //console.log('simpleEvaluate '+ num1 + ' '+ operation + ' '+ num2);
+    num1 = parseInt(num1);
+    num2 = parseInt(num2);
     switch(operation) {
         case '+':
+            console.log('simpleEvaluate of '+num1 + ' '+ operation + " "+ num2 + ' equals '+ (num1+num2));
             return num1 + num2
         case '-':
+        console.log('simpleEvaluate of '+num1 + ' '+ operation + " "+ num2 + ' equals '+ (num1-num2));
             return num1 - num2
         case '*':
+        console.log('simpleEvaluate of '+num1 + ' '+ operation + " "+ num2 + ' equals '+ (num1*num2));
             return num1 * num2
         case '/':
+        console.log('simpleEvaluate of '+num1 + ' '+ operation + " "+ num2 + ' equals '+ (num1/num2));
             return num1 / num2
     
+    }
 }
+
+function solve(){
+    if(isNaN(evalArray[evalArray.length - 1])){//if last evalArray index is NaN
+        alert('add another number');
+    }
+    else{
+        var index1 = evalArray.shift();
+        var index2 = evalArray.shift();
+        var index3 = evalArray.shift();
+        console.log('solving '+index1+ ' ' + index2 + ' ' + index3);
+        var answer = evaluate(index1, index2, index3);
+        console.log('answer: '+ answer);
+        return answer;
+    }
 }
 
 //bonus: clear button
